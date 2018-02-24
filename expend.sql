@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS crp_expenditures (
-    id text,
     cycle text,
+    id text,
     trans_id text,
     crp_filer_id text,
     recip_code text,
