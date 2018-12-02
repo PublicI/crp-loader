@@ -5,6 +5,13 @@ const iconv = require('iconv-lite');
 
 process.stdin
 	.pipe(iconv.decodeStream('ISO-8859-1'))
+	.pipe(
+		through2.obj(function (chunk, enc, callback) {
+			this.push(chunk.toString('utf8').replace(/\| +,\|/g,'|,|'));
+
+			callback();
+		})
+	)
 	.pipe(csv({
 		quote: '|',
 		headers: false,
@@ -14,7 +21,11 @@ process.stdin
 	}))
 	.pipe(
 		through2.obj(function (chunk, enc, callback) {
-			this.push(dsv.csvFormatRows([Object.values(chunk)]) + '\n');
+			let row = Object.values(chunk);
+
+			// row[row.length-1] = row[row.length-1].replace('|','');
+
+			this.push(dsv.tsvFormatRows([row]) + '\n');
 
 			callback();
 		})
