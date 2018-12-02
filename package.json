@@ -1,0 +1,10 @@
+{
+  "name": "crp-loader",
+  "version": "0.1.0",
+  "dependencies": {
+    "csv-parser": "^2.1.0",
+    "d3-dsv": "^1.0.10",
+    "iconv-lite": "^0.4.24",
+    "through2": "^3.0.0"
+  }
+}

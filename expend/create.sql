@@ -1,5 +1,3 @@
-DROP TABLE crp_expenditures;
-
 CREATE TABLE IF NOT EXISTS crp_expenditures (
     cycle text,
     id text,
@@ -23,6 +21,8 @@ CREATE TABLE IF NOT EXISTS crp_expenditures (
     ent_type text,
     source text
 );
+
+DELETE FROM crp_expenditures;
 
 GRANT ALL ON TABLE crp_expenditures TO redash_default;
 GRANT ALL ON TABLE crp_expenditures TO politics;
