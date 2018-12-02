@@ -14,14 +14,13 @@ process.stdin
 	)
 	.pipe(csv({
 		quote: '|',
-		headers: false,
-		mapValues({ header, index, value }) {
-			return value.trim()
-		}
+		headers: false
 	}))
 	.pipe(
 		through2.obj(function (chunk, enc, callback) {
 			let row = Object.values(chunk);
+
+			row = row.map(value => value.trim() !== '' ? value.trim().replace('\t',' ') : '\\N');
 
 			// row[row.length-1] = row[row.length-1].replace('|','');
 
