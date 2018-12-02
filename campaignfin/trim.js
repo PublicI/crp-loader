@@ -13,7 +13,7 @@ process.stdin
 		}
 	}))
 	.pipe(
-		through2.obj((chunk, enc, callback) => {
+		through2.obj(function(chunk, enc, callback) {
 			this.push(dsv.csvFormatRows([Object.values(chunk)]));
 
 			callback();
