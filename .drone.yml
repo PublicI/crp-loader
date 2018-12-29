@@ -1,22 +1,16 @@
 pipeline:
-  install:
-    image: publicintegrity/loader
-    commands:
-      - npm ci
+  build:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: publicintegrity/crp-loader
 
-  load-campaignfin:
-    image: publicintegrity/loader
-    secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost, cycles ]
-    commands:
-      - cd ./campaignfin
-      - bash load.sh
-
-  load-expend:
-    image: publicintegrity/loader
-    secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost, cycles ]
-    commands:
-      - cd ./expend
-      - bash load.sh
+  load:
+    image: publicintegrity/crp-loader
+    secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
+    environment:
+      - ARCHIVES=CampaignFin Expend
+      - USERS=redash_default politics
+      - CYCLES=18 16 14 12 10 08 06 04 02 00
 
   slack:
     image: plugins/slack

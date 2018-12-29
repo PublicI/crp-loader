@@ -1,5 +1,3 @@
-DROP TABLE crp_contributions;
-
 CREATE TABLE IF NOT EXISTS crp_contributions (
     cycle text,
     fectransid text,
@@ -26,11 +24,6 @@ CREATE TABLE IF NOT EXISTS crp_contributions (
     source text
 );
 
-GRANT ALL ON TABLE crp_contributions TO redash_default;
-GRANT ALL ON TABLE crp_contributions TO politics;
-
-DROP TABLE crp_committees;
-
 CREATE TABLE IF NOT EXISTS crp_committees (
     cycle text,
     cmteid text,
@@ -48,11 +41,6 @@ CREATE TABLE IF NOT EXISTS crp_committees (
     active text
 );
 
-GRANT ALL ON TABLE crp_committees TO redash_default;
-GRANT ALL ON TABLE crp_committees TO politics;
-
-DROP TABLE crp_comm_to_cand_contributions;
-
 CREATE TABLE IF NOT EXISTS crp_comm_to_cand_contributions (
     cycle text,
     fecrecno text,
@@ -65,11 +53,6 @@ CREATE TABLE IF NOT EXISTS crp_comm_to_cand_contributions (
     di text,
     feccandid text
 );
-
-GRANT ALL ON TABLE crp_comm_to_cand_contributions TO redash_default;
-GRANT ALL ON TABLE crp_comm_to_cand_contributions TO politics;
-
-DROP TABLE crp_comm_to_comm_contributions;
 
 CREATE TABLE IF NOT EXISTS crp_comm_to_comm_contributions (
     cycle text,
@@ -98,11 +81,6 @@ CREATE TABLE IF NOT EXISTS crp_comm_to_comm_contributions (
     source text
 );
 
-DROP TABLE crp_candidates;
-
-GRANT ALL ON TABLE crp_comm_to_cand_contributions TO redash_default;
-GRANT ALL ON TABLE crp_comm_to_cand_contributions TO politics;
-
 CREATE TABLE IF NOT EXISTS crp_candidates (
     cycle text,
     feccandid text,
@@ -117,6 +95,3 @@ CREATE TABLE IF NOT EXISTS crp_candidates (
     recipcode text,
     nopacs text
 );
-
-GRANT ALL ON TABLE crp_candidates TO redash_default;
-GRANT ALL ON TABLE crp_candidates TO politics;
