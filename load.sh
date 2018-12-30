@@ -37,8 +37,7 @@ for archive in $ARCHIVES; do
             table=${tables[$i]}
             echo $file" "$table
             7za x $archive$cycle".zip" $file$cycle".txt"
-            psql -c "DELETE FROM "$table" WHERE cycle like '%"$cycle"'"
-            cat $file$cycle".txt" | node ../trim | psql -c "COPY "$table" FROM STDIN"
+            cat $file$cycle".txt" | node ../trim | psql -c "START TRANSACTION; DELETE FROM "$table" WHERE cycle like '%"$cycle"'; COPY "$table" FROM STDIN; COMMIT TRANSACTION"
             rm  $file$cycle".txt"
         done
     done
