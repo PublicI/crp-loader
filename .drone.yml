@@ -6,6 +6,7 @@ pipeline:
 
   load:
     image: publicintegrity/crp-loader
+    pull: true
     secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
     environment:
       - ARCHIVES=CampaignFin Expend
