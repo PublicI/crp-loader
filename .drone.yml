@@ -6,9 +6,9 @@ pipeline:
 
   load:
     image: publicintegrity/crp-loader
-    pull: true
     secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
     commands:
+      - cd /usr/src/app
       - bash load.sh
     environment:
       - ARCHIVES=CampaignFin Expend
