@@ -8,6 +8,8 @@ pipeline:
     image: publicintegrity/crp-loader
     pull: true
     secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
+    commands:
+      - bash load.sh
     environment:
       - ARCHIVES=CampaignFin Expend
       - USERS=redash_default politics

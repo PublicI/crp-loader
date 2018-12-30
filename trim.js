@@ -9,7 +9,7 @@ const tabEscapeRegex = /\t/g;
 
 process.stdin
 	.pipe(iconv.decodeStream('ISO-8859-1'))
-	.pipe(map(chunk => chunk.toString('utf8').replace(extraSapceRegex, '|,|')))
+	.pipe(map.obj(chunk => chunk.toString('utf8').replace(extraSapceRegex, '|,|')))
 	.pipe(
 		csv({
 			quote: '|',
@@ -25,5 +25,5 @@ process.stdin
 			}
 		})
 	)
-	.pipe(map(chunk => Object.values(chunk).join('\t') + '\n'))
+	.pipe(map.obj(chunk => Object.values(chunk).join('\t') + '\n'))
 	.pipe(process.stdout);
