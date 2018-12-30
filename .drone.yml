@@ -10,7 +10,7 @@ pipeline:
     environment:
       - ARCHIVES=CampaignFin Expend
       - USERS=redash_default politics
-      - CYCLES=18 16 14 12 10 08 06 04 02 00
+      - CYCLES=18 # 16 14 12 10 08 06 04 02 00
 
   slack:
     image: plugins/slack
