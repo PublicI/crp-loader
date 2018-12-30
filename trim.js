@@ -1,51 +1,29 @@
 const csv = require('csv-parser');
-const through2 = require('through2');
-const dsv = require('d3-dsv');
+const map = require('through2-map');
 const iconv = require('iconv-lite');
+
+const extraSapceRegex = /\| +,\|/g;
+const slashEscapeRegex = /\\/g;
+const newLineEscapeRegex = /\n/g;
+const tabEscapeRegex = /\t/g;
 
 process.stdin
 	.pipe(iconv.decodeStream('ISO-8859-1'))
-	.pipe(
-		through2.obj(function(chunk, enc, callback) {
-			this.push(chunk.toString('utf8').replace(/\| +,\|/g, '|,|'));
-
-			callback();
-		})
-	)
+	.pipe(map(chunk => chunk.toString('utf8').replace(extraSapceRegex, '|,|')))
 	.pipe(
 		csv({
 			quote: '|',
-			headers: false
+			headers: false,
+			mapValues({ value }) {
+				return value.trim() !== ''
+					? value
+							.trim()
+							.replace(slashEscapeRegex, '\\\\')
+							.replace(newLineEscapeRegex, '\\\n')
+							.replace(tabEscapeRegex, '\\\t')
+					: '\\N';
+			}
 		})
 	)
-	.pipe(
-		through2(
-			{ objectMode: true },
-			function (chunk, enc, callback) {
-				let row = Object.values(chunk);
-
-				row = row.map(
-					value =>
-						value.trim() !== ''
-							? value
-									.trim()
-									.replace(/\\/g, '\\\\')
-									.replace(/\n/g, '\\\n')
-									.replace(/\t/g, '\\\t')
-							: '\\N'
-				);
-
-				// row[row.length-1] = row[row.length-1].replace('|','');
-
-				this.push(row.join('\t') + '\n');
-
-				callback();
-			}
-			/*
-			,function (next) {
-				this.push('\\.\n');
-				next();
-			}*/
-		)
-	)
+	.pipe(map(chunk => Object.values(chunk).join('\t') + '\n'))
 	.pipe(process.stdout);
