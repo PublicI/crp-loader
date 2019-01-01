@@ -3,7 +3,6 @@
 set -euo pipefail
 
 ARCHIVES="${ARCHIVES:-CampaignFin Expend}"
-USERS="${USERS:-redash_default politics}"
 CYCLES="${CYCLES:-18 16 14 12 10 08 06 04 02 00}" #  98 96 94 92 90
 
 mkdir -p data
@@ -21,12 +20,6 @@ for archive in $ARCHIVES; do
         files=( expends )
         tables=( crp_expenditures )
     fi
-
-    for table in $tables; do
-        for user in $USERS; do
-            psql -c "GRANT ALL ON TABLE "$table" TO "$user
-        done
-    done
 
     for cycle in $CYCLES; do
         echo $cycle
