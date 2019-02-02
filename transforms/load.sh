@@ -1,6 +1,6 @@
 #!/bin/bash
 
-psql -f create.sql
+psql -f $(dirname "$BASH_SOURCE")/create.sql
 
 indivs=crp_contributions
 cmtes=crp_committees
