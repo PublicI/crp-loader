@@ -19,7 +19,7 @@ for file in $(find $1*.txt); do
 
     DELETE
     FROM "$table"
-    WHERE cycle = '"$cycle"';
+    WHERE cycle like '%"$cycle"';
 
     COPY "$table"
     FROM STDIN CSV HEADER;
