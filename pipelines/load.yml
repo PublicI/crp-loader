@@ -1,0 +1,31 @@
+---
+pipeline:
+  name: crp-bulk-data-load
+transform:
+  image: publicintegrity/irs-990-loader:1854f525e29a
+  cmd:
+  - bash
+  stdin:
+  - ./transforms/load.sh /pfs/trim/
+  secrets:
+    - name: pachyderm-postgres-politics-auth
+      env_var: PGHOST
+      key: pghost
+    - name: pachyderm-postgres-politics-auth
+      env_var: PGDATABASE
+      key: pgdatabase
+    - name: pachyderm-postgres-politics-auth
+      env_var: PGUSER
+      key: pguser
+    - name: pachyderm-postgres-politics-auth
+      env_var: PGPASSWORD
+      key: pgpassword
+parallelism_spec:
+  constant: 2
+standby: true
+input:
+  pfs:
+    name: trim
+    repo: crp-bulk-data-trim
+    glob: /*
+    lazy: true
