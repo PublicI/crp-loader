@@ -4,16 +4,16 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     repo: publicintegrity/crp-loader
 
-  load:
-    image: publicintegrity/crp-loader
-    secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
-    commands:
-      - cd /usr/src/app
-      - bash load.sh
-    environment:
-      - ARCHIVES=CampaignFin Expend
-      - USERS=redash_default politics
-      - CYCLES=18 # 16 14 12 10 08 06 04 02 00
+  # load:
+  #   image: publicintegrity/crp-loader
+  #   secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
+  #   commands:
+  #     - cd /usr/src/app
+  #     - bash load.sh
+  #   environment:
+  #     - ARCHIVES=CampaignFin Expend
+  #     - USERS=redash_default politics
+  #     - CYCLES=18 # 16 14 12 10 08 06 04 02 00
 
   slack:
     image: plugins/slack
