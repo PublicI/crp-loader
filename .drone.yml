@@ -1,19 +1,21 @@
 pipeline:
-  build:
+  build_dry_run:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: publicintegrity/crp-loader
+    tags: ${DRONE_COMMIT_SHA:0:12}
+    dry_run: true
+    when:
+      event: [push, tag]
 
-  # load:
-  #   image: publicintegrity/crp-loader
-  #   secrets: [ pgport, pgpassword, pguser, pgdatabase, pghost ]
-  #   commands:
-  #     - cd /usr/src/app
-  #     - bash load.sh
-  #   environment:
-  #     - ARCHIVES=CampaignFin Expend
-  #     - USERS=redash_default politics
-  #     - CYCLES=18 # 16 14 12 10 08 06 04 02 00
+  build_push:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: publicintegrity/crp-loader
+    tags: ${DRONE_COMMIT_SHA:0:12}
+    when:
+      event: deployment
+      environment: production
 
   slack:
     image: plugins/slack
