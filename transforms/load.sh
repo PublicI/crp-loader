@@ -22,7 +22,7 @@ for file in $(find $1*.txt); do
     WHERE cycle like '%"$cycle"';
 
     COPY "$table"
-    FROM STDIN CSV HEADER;
+    FROM STDIN;
 
     COMMIT TRANSACTION;" < $file
 done
