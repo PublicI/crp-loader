@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-psql -f $(dirname "$BASH_SOURCE")/create.sql
+psql -v ON_ERROR_STOP=1 -f $(dirname "$BASH_SOURCE")/create.sql
 
 indivs=crp_contributions
 cmtes=crp_committees
@@ -17,14 +17,10 @@ for file in $(find $1*.txt); do
     table=${!type}
     cycle=$(echo $base | tr -dc '0-9')
 
-    psql -c "START TRANSACTION;
-
-    DELETE
+    psql --single-transaction -v ON_ERROR_STOP=1 -c "DELETE
     FROM "$table"
     WHERE cycle like '%"$cycle"';
 
     COPY "$table"
-    FROM STDIN;
-
-    COMMIT TRANSACTION;" < $file
+    FROM STDIN;" < $file
 done
