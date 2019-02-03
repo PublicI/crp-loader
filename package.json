@@ -5,5 +5,8 @@
     "csv-parser": "^2.1.0",
     "iconv-lite": "^0.4.24",
     "through2-map": "^3.0.0"
+  },
+  "bin": {
+  	"crp-loader": "./load.sh"
   }
 }
