@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 mkdir -p data/check
 ./transforms/check.sh ./data/check/
 mkdir -p data/download

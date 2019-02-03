@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 ARCHIVES="${ARCHIVES:-CampaignFin Expend}"
 CYCLES="${CYCLES:-18 16 14 12 10 08 06 04 02 00}" #  98 96 94 92 90
 

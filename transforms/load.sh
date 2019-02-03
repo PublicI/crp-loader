@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 psql -f $(dirname "$BASH_SOURCE")/create.sql
 
 indivs=crp_contributions
