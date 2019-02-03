@@ -2,12 +2,12 @@
 
 A Postgres loader for bulk data from the Center for Responsive Politics.
 
+Requires Bash, 7za, aws-cli, psql, Node.js.
+
 Run it like this:
 ```bash
-npm install
-chmod +x load.sh
 export PGHOST=<database host> PGDATABASE=<database name> PGUSER=<database user> PGPASSWORD=<database password>
-./load.sh
+npx PublicI/crp-loader
 ```
 
 Or use the Docker image:
