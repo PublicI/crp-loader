@@ -3,7 +3,9 @@ pipeline:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: publicintegrity/crp-loader
-    tags: ${DRONE_COMMIT_SHA:0:12}
+    tags:
+      - ${DRONE_COMMIT_SHA:0:12}
+      - latest
     dry_run: true
     when:
       event: [push, tag]
@@ -12,7 +14,9 @@ pipeline:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: publicintegrity/crp-loader
-    tags: ${DRONE_COMMIT_SHA:0:12}
+    tags:
+      - ${DRONE_COMMIT_SHA:0:12}
+      - latest
     when:
       event: deployment
       environment: production
