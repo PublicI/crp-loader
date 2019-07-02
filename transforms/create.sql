@@ -24,6 +24,30 @@ CREATE TABLE IF NOT EXISTS crp_contributions (
     source text
 );
 
+CREATE TABLE IF NOT EXISTS crp_expenditures (
+    cycle text,
+    id text,
+    trans_id text,
+    crp_filer_id text,
+    recip_code text,
+    pac_short text,
+    crp_recip_name text,
+    exp_code text,
+    amount numeric,
+    expenditure_date date,
+    city text,
+    state text,
+    zip text,
+    cmte_id_ef text,
+    candid text,
+    type text,
+    descrip text,
+    pg text,
+    elec_other text,
+    ent_type text,
+    source text
+);
+
 CREATE TABLE IF NOT EXISTS crp_committees (
     cycle text,
     cmteid text,
