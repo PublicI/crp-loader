@@ -2,7 +2,7 @@
 pipeline:
   name: crp-bulk-data-trim
 transform:
-  image: publicintegrity/crp-loader:539dc6e069bb
+  image: publicintegrity/crp-loader
   cmd:
   - bash
   stdin:
