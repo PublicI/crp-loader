@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 COPY . /usr/src/app
-RUN pip install awscli --upgrade --user
+RUN pip install awscli
 RUN npm ci && npm cache clean --force
 
 CMD ["bash","load.sh"]
